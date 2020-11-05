@@ -4,7 +4,6 @@ class Thermostat {
     this.temperature = 20
     this.powerSavingMode = true
     this.MINIMUM_TEMPERATURE = 10
-    this.MAXIMUM_TEMPERATURE = 25
   }
 
   up() {
@@ -21,9 +20,13 @@ class Thermostat {
     this.powerSavingMode = true
   }
 
+  powerSavingOff() {
+    this.powerSavingMode = false
+  }
+
   _checkMaximumTemperature() {
-    if (this.temperature == this.MAXIMUM_TEMPERATURE) {
-      error = `The maximum temperature is ${this.MAXIMUM_TEMPERATURE} degrees when power saving mode is ${this._powerSavingText()}.`
+    if (this.temperature == this._maximumTemperature()) {
+      error = `The maximum temperature is ${this._maximumTemperature()} degrees when power saving mode is ${this._powerSavingText()}.`
       throw new Error(error)
     }
   }
@@ -32,6 +35,14 @@ class Thermostat {
     if (this.temperature == this.MINIMUM_TEMPERATURE) {
       error = `The minimum temperature is ${this.MINIMUM_TEMPERATURE} degrees.`
       throw new Error(error)
+    }
+  }
+
+  _maximumTemperature() {
+    if (this.powerSavingMode) {
+      return 25
+    } else {
+      return 32
     }
   }
 

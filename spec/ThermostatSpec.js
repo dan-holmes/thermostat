@@ -32,4 +32,19 @@ describe("Thermostat", function () {
     expect(function () { thermostat.up() }).toThrow(new Error(error))
     expect(thermostat.temperature).toEqual(25)
   })
+  it("if power saving mode is off, the maximum temperature is 32 degrees", function () {
+    thermostat.powerSavingOff()
+    for (i = 0; i < 12; i++) {
+      thermostat.up()
+    }
+    error = "The maximum temperature is 32 degrees when power saving mode is off."
+    expect(function () { thermostat.up() }).toThrow(new Error(error))
+    expect(thermostat.temperature).toEqual(32)
+  })
+  it("power saving mode is on by default but can also be turned off", function () {
+    expect(thermostat.powerSavingMode).toEqual(true)
+    thermostat.powerSavingOff()
+    expect(thermostat.powerSavingMode).toEqual(false)
+  })
+
 })
