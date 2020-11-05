@@ -24,6 +24,20 @@ class Thermostat {
     this.powerSavingMode = false
   }
 
+  reset() {
+    this.temperature = 20
+  }
+
+  energyUsage() {
+    if (this.temperature < 18) {
+      return 'low-usage'
+    } else if (this.temperature <= 25) {
+      return 'medium-usage'
+    } else {
+      return 'high-usage'
+    }
+  }
+
   _checkMaximumTemperature() {
     if (this.temperature == this._maximumTemperature()) {
       error = `The maximum temperature is ${this._maximumTemperature()} degrees when power saving mode is ${this._powerSavingText()}.`
