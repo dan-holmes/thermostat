@@ -36,7 +36,7 @@ class Thermostat {
   }
 
   _powerSavingText() {
-    if this.powerSavingMode {
+    if (this.powerSavingMode) {
       return 'on'
     } else {
       return 'off'
