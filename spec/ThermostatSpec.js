@@ -19,7 +19,17 @@ describe("Thermostat", function () {
     for (i = 0; i < 10; i++) {
       thermostat.down()
     }
-    expect(function () { thermostat.down() }).toThrow(new Error("The minimum temperature is 10 degrees."))
+    error = "The minimum temperature is 10 degrees."
+    expect(function () { thermostat.down() }).toThrow(new Error(error))
     expect(thermostat.temperature).toEqual(10)
+  })
+  it("if power saving mode is on, the maximum temperature is 25 degrees", function () {
+    thermostat.powerSavingOn()
+    for (i = 0; i < 5; i++) {
+      thermostat.up()
+    }
+    error = "The maximum temperature is 25 degrees when power saving mode is on."
+    expect(function () { thermostat.up() }).toThrow(new Error(error))
+    expect(thermostat.temperature).toEqual(25)
   })
 })
