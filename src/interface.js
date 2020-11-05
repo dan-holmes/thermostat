@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  thermostat = new Thermostat
+  var thermostat = new Thermostat
   refreshTemp()
 
   $("#up").click(function () {
@@ -22,12 +22,13 @@ $(document).ready(function () {
     refreshPowerSavingStatus()
   })
 
+  function refreshTemp() {
+    $("#current-temperature").text(thermostat.getCurrentTemperature())
+    $("#current-temperature").attr('class', thermostat.energyUsage())
+  }
+
+  function refreshPowerSavingStatus() {
+    $("#power-saving-status").text(thermostat.powerSavingText())
+  }
 })
 
-var refreshTemp = function () {
-  $("#current-temperature").text(thermostat.getCurrentTemperature())
-}
-
-var refreshPowerSavingStatus = function () {
-  $("#power-saving-status").text(thermostat.powerSavingText())
-}
