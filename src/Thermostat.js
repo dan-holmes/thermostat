@@ -8,6 +8,9 @@ class Thermostat {
   }
 
   down() {
+    if (this.temperature == 10) {
+      throw new Error("The minimum temperature is 10 degrees.")
+    }
     this.temperature--
   }
 }

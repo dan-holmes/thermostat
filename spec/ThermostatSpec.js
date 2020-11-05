@@ -15,4 +15,11 @@ describe("Thermostat", function () {
     thermostat.down()
     expect(thermostat.temperature).toEqual(19)
   })
+  it("has a minimum temperature of 10 degrees", function () {
+    for (i = 0; i < 10; i++) {
+      thermostat.down()
+    }
+    expect(function () { thermostat.down() }).toThrow(new Error("The minimum temperature is 10 degrees."))
+    expect(thermostat.temperature).toEqual(10)
+  })
 })
