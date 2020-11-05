@@ -42,9 +42,9 @@ describe("Thermostat", function () {
     expect(thermostat.getCurrentTemperature()).toEqual(32)
   })
   it("power saving mode is on by default but can also be turned off", function () {
-    expect(thermostat.powerSavingMode).toEqual(true)
+    expect(thermostat.getPowerSavingStatus()).toEqual(true)
     thermostat.powerSavingOff()
-    expect(thermostat.powerSavingMode).toEqual(false)
+    expect(thermostat.getPowerSavingStatus()).toEqual(false)
   })
   it("you can reset the temperature to 20 with a reset function", function () {
     thermostat.up()

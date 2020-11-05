@@ -16,6 +16,10 @@ class Thermostat {
     return this.temperature
   }
 
+  getPowerSavingStatus() {
+    return this.powerSavingMode
+  }
+
   up() {
     this._checkMaximumTemperature()
     this.temperature++
@@ -34,6 +38,18 @@ class Thermostat {
     this.powerSavingMode = false
   }
 
+  powerSavingOnOff() {
+    this.powerSavingMode = !this.powerSavingMode
+  }
+
+  powerSavingText() {
+    if (this.powerSavingMode) {
+      return 'on'
+    } else {
+      return 'off'
+    }
+  }
+
   reset() {
     this.temperature = this.DEFAULT_TEMPERATURE
   }
@@ -49,14 +65,14 @@ class Thermostat {
   }
 
   _checkMaximumTemperature() {
-    if (this.temperature == this._maximumTemperature()) {
-      error = `The maximum temperature is ${this._maximumTemperature()} degrees when power saving mode is ${this._powerSavingText()}.`
+    if (this.temperature >= this._maximumTemperature()) {
+      error = `The maximum temperature is ${this._maximumTemperature()} degrees when power saving mode is ${this.powerSavingText()}.`
       throw new Error(error)
     }
   }
 
   _checkMinimumTemperature() {
-    if (this.temperature == this.MINIMUM_TEMPERATURE) {
+    if (this.temperature <= this.MINIMUM_TEMPERATURE) {
       error = `The minimum temperature is ${this.MINIMUM_TEMPERATURE} degrees.`
       throw new Error(error)
     }
@@ -70,11 +86,5 @@ class Thermostat {
     }
   }
 
-  _powerSavingText() {
-    if (this.powerSavingMode) {
-      return 'on'
-    } else {
-      return 'off'
-    }
-  }
+
 }
